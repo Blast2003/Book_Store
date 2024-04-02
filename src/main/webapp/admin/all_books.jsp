@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.DAO.BookDAOImpl" %>
+<%@ page import="com.DB.DBconnect" %>
+<%@ page import="com.entity.BookDtls" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +19,20 @@
 	<%@include file="navbar.jsp" %>
 	<h3 class="text-center">Hello Admin</h3>
 	
+			<c:if test="${not empty succMgs }">
+			<h5 class="text-center text-success">${ succMgs }</h5>
+			<c:remove var="successMsg" scope="session"/>
+			</c:if>
+			<c:if test="${not empty failedMsg }">
+			<h5 class="text-center text-danger">${ failedMsg }</h5>
+			<c:remove var="failedMsg" scope="session"/>
+			</c:if>
+	
 		<table class="table table-striped">
 		  <thead class="bg-primary text-white">
 		    <tr>
-		      <th scope="col">Id</th>
+		    <th scope = "col">ID</th>
+		      <th scope="col">Image</th>
 		      <th scope="col">Book Name</th>
 		      <th scope="col">Author</th>
 		      <th scope="col">Price</th>
@@ -24,41 +42,35 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
+			  <% 
+			  BookDAOImpl dao = new BookDAOImpl(DBconnect.getCon());
+			  List<BookDtls> list =dao.getAllBooks();
+			  for(BookDtls b:list){
+			%>
+			<tr>
+		      <td ><%=b.getBookID() %></td>
+		      <td><img src="../book/<%=b.getPhotoName()%>" style="width: 50px; height: 50px"></td>
+		      <td><%=b.getBookName() %></td>
+		      <td><%=b.getAuthor() %></td>
+		      <td><%=b.getPrice() %></td>
+		      <td><%=b.getBookCategory() %></td>
+		      <td><%=b.getStatus() %></td>		      
 		      <td>
-		      	<a href="#" class="btn btn-sm btn-primary">Edit</a>
-		      	<a href="#" class="btn btn-sm btn-danger">Delete</a>
+		      	<a href="edit_books.jsp?id=<%=b.getBookID() %>" 
+		      	class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+		      	
+		      	<a href="../delete?id=<%=b.getBookID() %>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i>Delete</a>
 		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>Otto</td>
-		      <td>@mdo</td><td>
-		      	<a href="#" class="btn btn-sm btn-primary">Edit</a>
-		      	<a href="#" class="btn btn-sm btn-danger">Delete</a>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>
-		      	<a href="#" class="btn btn-sm btn-primary">Edit</a>
-		      	<a href="#" class="btn btn-sm btn-danger">Delete</a>
-		      </td>
-		    </tr>
+		    </tr>	
+		    
+		    	
+			  <% 
+			  }
+			  %>
+
+
+
+
 		  </tbody>
 	</table>
 	
