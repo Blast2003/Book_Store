@@ -25,7 +25,9 @@ public class RegisterServlet extends HttpServlet {
 			String password = req.getParameter("password");
 			String check = req.getParameter("check");
 			
-//			System.out.println(name+" "+email+" "+phno+" "+password+" "+check);
+//			//System.out.println(name+" "+email+" "+phno+" "+password+" "+check);
+			
+			
 			
 			User user = new User();
 			user.setName(name);

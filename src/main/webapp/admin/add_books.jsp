@@ -11,6 +11,9 @@
 </head>
 <body style="background-color: #f0f2f2;">
 	<%@include file="navbar.jsp" %>
+	<c:if test="${ empty userobj }">
+		<c:redirect url="../login.jsp"/>
+	</c:if>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
@@ -18,9 +21,9 @@
 					<div class="cardd-body">
 						<h4 class="text-center">Add Books</h4>
 						
-						<c:if test="${not empty successMgs }">
-							<p class="text-center text-success">${ successMgs }</p>
-							<c:remove var="successMsg" scope="session"/>
+						<c:if test="${not empty succMgs }">
+							<p class="text-center text-success">${ succMgs }</p>
+							<c:remove var="succMsg" scope="session"/>
 						</c:if>
 						
 						<c:if test="${not empty failedMsg }">
@@ -41,13 +44,13 @@
 						  </div>
 						  
 						  <div class="form-group">
-						    <label for="exampleInputEmail1">Price*</label>
-						    <input type="number" class="form-control" id="exampleInputPassword1" name="price">
+						    <label for="exampleInputPassword1">Price*</label>
+						    <input name="price" type="number" class="form-control" id="exampleInputPassword1" name="price">
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="inputState">Book Categories</label>
-							    <select id="inputState" name="btype" class="form-control">
+							    <select id="inputState" name="categories" class="form-control">
 								    <option selected>--select---</option>
 								    <option value="New">New Book</option>
 							    </select>
@@ -55,7 +58,7 @@
 						  
 						  <div class="form-group">
 						    <label for="inputState">Book Status</label>
-							    <select id="inputState" name="bstatus" class="form-control">
+							    <select id="inputState" name="status" class="form-control">
 								    <option selected>--select---</option>
 								    <option value="Active">Active</option>
 								    <option value="Inactive">Inactive</option>
@@ -64,7 +67,7 @@
 						  
 						   <div class="form-group">
 						    <label for="exampleFormControlFile1">Upload Image</label>
-						    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="bimg">
+						    <input name="bimg" type="file" class="form-control-file" id="exampleFormControlFile1" name="bimg">
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary">Add</button>

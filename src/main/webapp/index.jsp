@@ -1,5 +1,10 @@
+<%@page import="com.DB.DBconnect"%>
+<%@page import="com.DAO.BookDAOImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import ="com.entity.*"%>    
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,71 +35,57 @@
 <!-- Start Recent Book -->
 	<div class="container">
 		<h3 class="text-center">Recent Book</h3>
-			<div class="row">
+		<div class="row">
+		<%
+		BookDAOImpl dao2 = new BookDAOImpl(DBconnect.getCon());
+		List<BookDtls> list2 =  dao2.getRecentBooks();
+		for(BookDtls b:list2)
+		{%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
 						<div class="card-body text-center">
-							<img alt="" src="book/java.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Java Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
+							<img alt="" src="book/<%=b.getPhotoName()%>" style="width:150px; height:200px" class="img-thumblin">
+							<p><%=b.getBookName() %></p> 
+							<p><%=b.getAuthor() %></p> 
+							<p>
+							
+							<%
+							if(b.getBookCategory().equals("Old"))
+							{%>
+								Categories:<%=b.getBookCategory() %></p>
+								<div class="row">
+								
+									<a href="" class="btn btn-danger btn-sm "><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+									<a href="" class="btn btn-danger btn-sm <i class="fa-regular fa-dollar-sign"></i>">View Details</a>
+									<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i>299</a>
+								</div>
+								
+							<%
+							}else{
+							%>
+							Categories:<%=b.getBookCategory() %></p>
 							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
+								<a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+								<a href="" class="btn btn-danger btn-sm">View Details</a>
+								<a href="" class="btn btn-danger btn-sm"><i class="fa-regular fa-dollar-sign"></i>299</a>
 							</div>
+							<%
+							}
+							%>
+
+							
+							
+							
+							
 						</div>
 					</div>
-				</div>
-		
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/linux.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Linux Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/sql.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>SQL Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/story.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Story Book</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div>	
 			
+		<%
+		}		
+		%>
+
+						
 			</div>
 				
 			<div class="text-center mt-2">
@@ -107,72 +98,36 @@
 	<hr>
 
 <!-- Start New Book -->
+
 	<div class="container">
 		<h3 class="text-center">New Book</h3>
 			<div class="row">
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/story.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Story Book</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
-		
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/sql.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>SQL Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
 				
+				<%
+				BookDAOImpl dao = new BookDAOImpl(DBconnect.getCon());
+				List<BookDtls> list = dao.getNewBook();
+				for(BookDtls b:list)
+				{%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
 						<div class="card-body text-center">
-							<img alt="" src="book/java.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Java Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
+							<img alt="" src="book/<%=b.getPhotoName() %>" style="width:150px; height:200px" class="img-thumblin">
+							<p><%=b.getBookName() %></p> 
+							<p><%=b.getAuthor() %>s</p> 
+							<p>Categories:<%=b.getBookCategory() %></p>
 							<div class="row">
 								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
+								<a href="" class="btn btn-danger btn-sm ">View Details</a>
+								<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i><%=b.getPrice() %>
+									</a>
 							</div>
 						</div>
-					</div>
-				</div>
-				
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/linux.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Linux Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:New</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
+					</div>	
+				</div>				
+				<%}
+	
+				%>
+
 			
 			</div>
 				
@@ -189,65 +144,36 @@
 	<div class="container">
 		<h3 class="text-center">Old Book</h3>
 			<div class="row">
+		<%
+		BookDAOImpl dao3= new BookDAOImpl(DBconnect.getCon());
+		List<BookDtls> list3 =  dao3.getOldBooks();
+		for(BookDtls b:list3)
+		{%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
 						<div class="card-body text-center">
-							<img alt="" src="book/story.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Story Book</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:Old</p>
+							<img alt="" src="book/<%=b.getPhotoName()%>" style="width:150px; height:200px" class="img-thumblin">
+							<p><%=b.getBookName() %></p> 
+							<p><%=b.getAuthor() %></p> 
+							<p><%=b.getBookCategory() %></p>
 							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-5">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
+								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+								<a href="" class="btn btn-danger btn-sm ">View Details</a>
+								<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i><%=b.getPrice() %></a>
 							</div>
+
+
 						</div>
 					</div>
-				</div>
+				</div>	
+		<%
+		}		
+		%>
 		
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/sql.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>SQL Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:Old</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-5">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			
 				
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/java.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Java Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:Old</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-5">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
 				
-				<div class="col-md-3">
-					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" src="book/linux.jpg" style="width:150px; height:200px" class="img-thumblin">
-							<p>Linux Programming</p> 
-							<p>Josh Thompsons</p> 
-							<p>Categories:Old</p>
-							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-5">View Details</a>
-								<a href="" class="btn btn-danger btn-sm ml-1">299</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			
 			</div>
 				
