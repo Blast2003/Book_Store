@@ -249,6 +249,96 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return list;
 	}
+
+	@Override
+	public List<BookDtls> getAllRecentBook() {
+		List<BookDtls> list = new ArrayList<BookDtls>();		
+		BookDtls b = null;
+		try {
+			String sql= "select * from book_dtls where status=? order by bookID DESC";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "Active");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				b = new BookDtls();
+				b.setBookID(rs.getInt(1));
+				b.setBookName(rs.getString(2));
+				b.setAuthor(rs.getNString(3));
+				b.setPrice(rs.getNString(4));
+				b.setBookCategory(rs.getString(5));
+				b.setStatus(rs.getString(6));
+				b.setPhotoName(rs.getString(7));
+				b.setEmail(rs.getString(8));
+				list.add(b);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<BookDtls> getAllNewBook() {
+		List<BookDtls> list = new ArrayList<BookDtls>();		
+		BookDtls b = null;
+		try {
+			String sql= "select * from book_dtls where bookCategory=? and status=? order by bookID DESC";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "New");
+			ps.setString(2, "Active");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next() ) {
+				b = new BookDtls();
+				b.setBookID(rs.getInt(1));
+				b.setBookName(rs.getString(2));
+				b.setAuthor(rs.getNString(3));
+				b.setPrice(rs.getNString(4));
+				b.setBookCategory(rs.getString(5));
+				b.setStatus(rs.getString(6));
+				b.setPhotoName(rs.getString(7));
+				b.setEmail(rs.getString(8));
+				list.add(b);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list; 
+	}
+
+	@Override
+	public List<BookDtls> getAllOldBook() {
+		List<BookDtls> list = new ArrayList<BookDtls>();		
+		BookDtls b = null;
+		try {
+			String sql= "select * from book_dtls where bookCategory=? and status=? order by bookID DESC";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "Old");
+			ps.setString(2, "Active");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				b = new BookDtls();
+				b.setBookID(rs.getInt(1));
+				b.setBookName(rs.getString(2));
+				b.setAuthor(rs.getNString(3));
+				b.setPrice(rs.getNString(4));
+				b.setBookCategory(rs.getString(5));
+				b.setStatus(rs.getString(6));
+				b.setPhotoName(rs.getString(7));
+				b.setEmail(rs.getString(8));
+				list.add(b);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
 	

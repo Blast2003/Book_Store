@@ -1,16 +1,25 @@
 <%@page import="com.DB.DBconnect"%>
 <%@page import="com.DAO.BookDAOImpl"%>
+<%@page import ="com.entity.BookDtls"%>    
+<%@page import="java.util.List" %>
+<%@page import="java.sql.Connection" %>
+<%@page import="com.entity.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import ="com.entity.*"%>    
-<%@ page import="java.util.List" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>E-book: Index</title>
 <%@include file="all_component/allCss.jsp" %>
+<style type="text/css">
+
+.crd-ho:hover{
+	background-color: #f7faf8;
+}
+
+</style>
+
 <style type="text/css">
 .back-img{
 	background: url("img/b.jpg");
@@ -26,7 +35,10 @@
 </style>
 </head>
 <body style="background-color: #f7faf8;">
-	<%@include file="all_component/navbar.jsp" %>
+<%
+User u=(User)session.getAttribute("userobj");
+%>
+	<%@include  file="all_component/navbar.jsp" %>
 	<div class="container-fluid back-img">
 		<h2 class ="text-center	text-dark">E-book Management System</h2>
 	</div>
@@ -54,21 +66,26 @@
 							{%>
 								Categories:<%=b.getBookCategory() %></p>
 								<div class="row">
-								
-									<a href="" class="btn btn-danger btn-sm "><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-									<a href="" class="btn btn-danger btn-sm <i class="fa-regular fa-dollar-sign"></i>">View Details</a>
-									<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i>299</a>
-								</div>
+							<a href="view_books.jsp?bid=<%=b.getBookID()%>"
+								class="btn btn-danger btn-sm ml-1">View Details</a> <a href=""
+								class="btn btn-danger btn-sm ml-1"> <%=b.getPrice()%> <i
+								class="fa-regular fa-dollar-sign"></i>View Details
+							</a> <a href="" class="btn btn-danger btn-sm "><i
+								class="fa-regular fa-dollar-sign"></i></a>
+						</div>
 								
 							<%
 							}else{
 							%>
 							Categories:<%=b.getBookCategory() %></p>
 							<div class="row">
-								<a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm">View Details</a>
-								<a href="" class="btn btn-danger btn-sm"><i class="fa-regular fa-dollar-sign"></i>299</a>
-							</div>
+							<a href="" class="btn btn-danger btn-sm"><i
+								class="fa-solid fa-cart-shopping"></i> Add Cart</a> <a
+								href="view_books.jsp?bid=<%=b.getBookID()%>"
+								class="btn btn-danger btn-sm">View Details</a> <a href=""
+								class="btn btn-danger btn-sm"><i
+								class="fa-regular fa-dollar-sign"></i>299</a>
+						</div>
 							<%
 							}
 							%>
@@ -88,8 +105,8 @@
 						
 			</div>
 				
-			<div class="text-center mt-2">
-				<a href="" class="btn btn-danger btn-sm text-white">View All</a>	
+			<div class="text-center mt-1">
+				<a href="all_recent_book.jsp" class="btn btn-danger btn-sm text-white">View All</a>	
 			</div>				
 			
 	</div>
@@ -116,9 +133,18 @@
 							<p><%=b.getAuthor() %>s</p> 
 							<p>Categories:<%=b.getBookCategory() %></p>
 							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ">View Details</a>
-								<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i><%=b.getPrice() %>
+								<% if(u==null) 
+								{%>
+									<a href="login.jsp" class="btn btn-danger btn-sm ml-2  ">Add Cart</a>
+								<%}else{
+								%>
+									 <a href="cart?bid<%=b.getBookID()%> && uid=<%=u.getId() %>" class="btn btn-danger btn-sm ml-1"> Add Cart</a>
+								<%
+								}
+								 %>
+								
+								<a href="view_books.jsp?bid=<%=b.getBookID()%>" class="btn btn-success btn-sm ml-2">View Details</a>
+								<a href="" class="btn btn-danger btn-sm ml-1 "><i class="fa-regular fa-dollar-sign"></i><%=b.getPrice() %>
 									</a>
 							</div>
 						</div>
@@ -131,8 +157,8 @@
 			
 			</div>
 				
-			<div class="text-center mt-2">
-				<a href="" class="btn btn-danger btn-sm text-white">View All</a>	
+			<div class="text-center mt-1">
+				<a href="all_new_book.jsp" class="btn btn-danger btn-sm text-white">View All</a>	
 			</div>				
 			
 	</div>
@@ -157,8 +183,7 @@
 							<p><%=b.getAuthor() %></p> 
 							<p><%=b.getBookCategory() %></p>
 							<div class="row">
-								<a href="" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-cart-shopping"></i> Add Cart</a>
-								<a href="" class="btn btn-danger btn-sm ">View Details</a>
+								<a href="view_books.jsp?bid=<%=b.getBookID()%>" class="btn btn-danger btn-sm ">View Details</a>
 								<a href="" class="btn btn-danger btn-sm "><i class="fa-regular fa-dollar-sign"></i><%=b.getPrice() %></a>
 							</div>
 
@@ -171,14 +196,10 @@
 		%>
 		
 			
-				
-				
-				
-			
 			</div>
 				
-			<div class="text-center mt-2">
-				<a href="" class="btn btn-danger btn-sm text-white mb-2">View All</a>	
+			<div class="text-center mt-1">
+				<a href="all_old_book.jsp" class="btn btn-danger btn-sm text-white mb-2">View All</a>	
 			</div>				
 			
 	</div>
