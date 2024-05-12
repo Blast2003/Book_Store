@@ -38,6 +38,7 @@
 						
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Email address</label>
+								<!-- type="email" => help to identify email with @ -->
 						    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required" name="email">
 						  </div>
 						  
@@ -66,7 +67,12 @@
 			</div>
 		</div>
 	</div>
-	
-	<%@include file="all_component/footer.jsp" %>
 </body>
+
+<footer>
+	<div>
+		<%@include file="all_component/footer.jsp" %>
+	</div>
+</footer>
+
 </html>

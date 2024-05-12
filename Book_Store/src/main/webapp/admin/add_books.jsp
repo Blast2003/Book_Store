@@ -11,6 +11,12 @@
 </head>
 <body style="background-color: #f0f2f2;">
 	<%@include file="navbar.jsp" %>
+	
+	<!-- If has available link with admin => return login because it does not contain any attribute-->
+	<c:if test="${empty userobj}">
+		<c:redirect url="../login.jsp"/>
+	</c:if>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
@@ -50,6 +56,7 @@
 							    <select id="inputState" name="btype" class="form-control">
 								    <option selected>--select---</option>
 								    <option value="New">New Book</option>
+								    <option value="Old">Old Book</option>
 							    </select>
 						  </div>
 						  
