@@ -9,46 +9,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.DAO.BookDAOImpl;
+import com.DAO.BookDaoIplm;
 import com.DB.DBconnect;
 import com.entity.BookDtls;
 
 @WebServlet("/editbooks")
-public class EditBookServlet extends HttpServlet  {
+public class EditBooksServlet extends HttpServlet{
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		
 		try {
 			int id = Integer.parseInt(req.getParameter("id"));
-			String bookName = req.getParameter("bname");
+ 			String BookName = req.getParameter("bname");
 			String author = req.getParameter("author");
 			String price = req.getParameter("price");
 			String status = req.getParameter("status");
 			
 			BookDtls b = new BookDtls();
-			b.setBookID(id);
-			b.setBookName(bookName);
+			b.setBookId(id);
+			b.setBookname(BookName);
 			b.setAuthor(author);
 			b.setPrice(price);
 			b.setStatus(status);
 			
-			BookDAOImpl dao = new BookDAOImpl(DBconnect.getCon());
-			boolean f = dao.updateEditBook(b);
+			BookDaoIplm dao = new BookDaoIplm(DBconnect.getCon());
+			boolean f = dao.UpdateEditBooks(b);
 			
 			HttpSession session = req.getSession();
-			
-			if(f){
-				session.setAttribute("succMsg", "Book update Successfully..");
-				resp.sendRedirect("addmin/all_books.jsp");
+			if(f) {
+				session.setAttribute("successMsg", "Book Update Successfully");
+				res.sendRedirect("admin/all_books.jsp");
 			}else {
-				session.setAttribute("failedMsg", "Someting wrong on server");
-				resp.sendRedirect("admin/all_books.jsp");
+				session.setAttribute("failedMsg", "Something Wrong on server");
+				res.sendRedirect("admin/all_books.jsp");
 			}
 			
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

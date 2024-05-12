@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ebook</groupId>
-  <artifactId>book_store</artifactId>
+  <artifactId>Ebook-App</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>book_store Maven Webapp</name>
+  <name>Ebook-App Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -14,16 +14,18 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
-     <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+  
+	  <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>jstl</artifactId>
 	    <version>1.2</version>
 	</dependency>
-    
+
+  
+  
   </dependencies>
   <build>
-    <finalName>book_store</finalName>
+    <finalName>Ebook-App</finalName>
   </build>
 </project>

@@ -1,4 +1,4 @@
-package com.user.serverlet;
+package com.user.servlet;
 
 import java.io.IOException;
 
@@ -31,21 +31,19 @@ public class LoginServlet extends HttpServlet{
 			if("admin@gmail.com".equals(email) && "admin".equals(password)) {
 				User user = new User();
 				user.setName("Admin");
-				
-				session.setAttribute("userobj", user);
+				session.setAttribute("userobj", user); // userobj = user
 				res.sendRedirect("admin/home.jsp");
-			} else {
+			}else {
 				
 				User user = dao.login(email, password);
-				if(user!=null) {
-					session.setAttribute("userobj", user);
+				if(user != null) {
+					session.setAttribute("userobj", user); //userobj = user
 					res.sendRedirect("index.jsp");
 				}else {
 					session.setAttribute("failedMsg", "Email or Password Invalid");
 					res.sendRedirect("login.jsp");
 				}
-				
-				res.sendRedirect("home.jsp");
+			
 			}
 			
 		} catch (Exception e) {

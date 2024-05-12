@@ -26,8 +26,9 @@
 		<div class="row p-3">
 				
 				<%
+					String ch = request.getParameter("ch");
 					BookDaoIplm dao1 = new BookDaoIplm(DBconnect.getCon());
-					List<BookDtls> list1 = dao1.getAllRecentBook();
+					List<BookDtls> list1 = dao1.getBookBySearch(ch);
 					for(BookDtls b: list1){
 					%>
 					

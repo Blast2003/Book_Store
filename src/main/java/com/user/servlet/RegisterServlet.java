@@ -1,4 +1,4 @@
-package com.user.serverlet;
+package com.user.servlet;
 
 import java.io.IOException;
 
@@ -25,9 +25,7 @@ public class RegisterServlet extends HttpServlet {
 			String password = req.getParameter("password");
 			String check = req.getParameter("check");
 			
-//			//System.out.println(name+" "+email+" "+phno+" "+password+" "+check);
-			
-			
+//			System.out.println(name+" "+email+" "+phno+" "+password+" "+check);
 			
 			User user = new User();
 			user.setName(name);
@@ -39,18 +37,22 @@ public class RegisterServlet extends HttpServlet {
 			
 			if(check!= null) {
 				UserDAOIplm dao = new UserDAOIplm(DBconnect.getCon());
-				boolean f= dao.userRegister(user);
 				
-				//session help to show the status msg after register success or fail
-				if(f) {			
-					// set attribute for screen on web server
-					session.setAttribute("successMsg", "Registration Successfully"); 
-					res.sendRedirect("register.jsp");
-				} else {				
-					// set attribute for screen on web server
-					session.setAttribute("failedMsg", "Something wrong in server");
+				boolean f2 =  dao.checkUser(email);
+				if(f2) { // false
+					boolean f = dao.userRegister(user);
+					if(f) { // true
+						session.setAttribute("successMsg", "Registration Successfully...");
+						res.sendRedirect("register.jsp");
+					} else {
+						session.setAttribute("failedMsg", "Something wrong on Server...");
+						res.sendRedirect("register.jsp");
+					}
+				} else {
+					session.setAttribute("failedMsg", "User Already Exist Try Another Email");
 					res.sendRedirect("register.jsp");
 				}
+				
 			} else {
 				// set attribute for screen on web server
 				session.setAttribute("failedMsg", "Please check agree & Terms Condition");

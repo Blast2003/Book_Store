@@ -1,4 +1,4 @@
-package com.user.serverlet;
+package com.user.servlet;
 
 import java.io.IOException;
 
@@ -13,19 +13,23 @@ import javax.servlet.http.HttpSession;
 public class LogoutServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
 		try {
-			
 			HttpSession session = req.getSession();
 			session.removeAttribute("userobj");
 			
-			HttpSession session2 =req.getSession();
-			session.setAttribute("succMsg", "Logout Sucessfully");
-			resp.sendRedirect("login.jsp");
 			
-		}catch (Exception e) {
+			// accept remove the first session 
+			HttpSession session2 = req.getSession();
+			
+			//the first session return attribute continuously
+			session.setAttribute("successMsg", "Logout Successfully");
+			res.sendRedirect("login.jsp");
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 }
