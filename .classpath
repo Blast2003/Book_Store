@@ -6,6 +6,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="test" value="true"/>
@@ -20,31 +26,30 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="optional" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JRE [17.0.9]">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/Github/jstl-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/apache-tomcat-9.0.87/lib/annotations-api.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/Github/mysql-connector-java-8.0.22.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/Github/jsp-api-2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/Github/jsp-api.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/dogiathuy/Downloads/Github/javax.servlet-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="/Servers/Tomcat v9.0 Server at localhost-config"/>
+	<classpathentry kind="lib" path="F:/Java_Web/apache-tomcat-9.0.86/apache-tomcat-9.0.86/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="F:/Java_Web/apache-tomcat-9.0.86/apache-tomcat-9.0.86/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phi/Downloads/jsp-api-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phi/Downloads/mysql-connector-java-8.0.22.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Phi/Downloads/javax.servlet-api-3.0.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
